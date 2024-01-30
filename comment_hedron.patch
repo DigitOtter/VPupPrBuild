@@ -1,0 +1,81 @@
+From a48778932b402d04d3a57964c1cd53c10f64392b Mon Sep 17 00:00:00 2001
+From: DigitOtter <digitotter@protonmail.com>
+Date: Mon, 29 Jan 2024 22:13:40 +0100
+Subject: [PATCH] Remove hedron_compile_commands
+
+---
+ GDMP/BUILD           | 42 +++++++++++++++++++++---------------------
+ mediapipe_setup.diff |  4 ++--
+ 2 files changed, 23 insertions(+), 23 deletions(-)
+
+diff --git a/GDMP/BUILD b/GDMP/BUILD
+index d1f3b9a..97df456 100644
+--- a/GDMP/BUILD
++++ b/GDMP/BUILD
+@@ -1,4 +1,4 @@
+-load("@hedron_compile_commands//:refresh_compile_commands.bzl", "refresh_compile_commands")
++#load("@hedron_compile_commands//:refresh_compile_commands.bzl", "refresh_compile_commands")
+ load("//GDMP:GDMP.bzl", "CALCULATORS", "DATA", "TASKS")
+
+ cc_library(
+@@ -28,23 +28,23 @@ cc_library(
+     alwayslink = 1,
+ )
+
+-refresh_compile_commands(
+-    name = "refresh_compile_commands",
+-    targets = {
+-        "//GDMP:GDMP": """
+-        --copt -Ibazel-bin
+-        --copt -Ibazel-bin/external/com_github_gflags_gflags/_virtual_includes/gflags
+-        --copt -Ibazel-bin/external/com_github_glog_glog/_virtual_includes/default_glog_headers
+-        --copt -Ibazel-bin/external/com_github_glog_glog_no_gflags/_virtual_includes/default_glog_headers
+-        """,
+-        "//GDMP/io:camera_helper_android": """
+-        --host_crosstool_top=@bazel_tools//tools/cpp:toolchain
+-        --crosstool_top=//external:android/crosstool
+-        --cpu=arm64-v8a
+-        --copt -Ibazel-bin
+-        --copt -Ibazel-bin/external/com_github_gflags_gflags/_virtual_includes/gflags
+-        --copt -Ibazel-bin/external/com_github_glog_glog/_virtual_includes/default_glog_headers
+-        --copt -Ibazel-bin/external/com_github_glog_glog_no_gflags/_virtual_includes/default_glog_headers
+-        """,
+-    },
+-)
++#refresh_compile_commands(
++#    name = "refresh_compile_commands",
++#    targets = {
++#        "//GDMP:GDMP": """
++#        --copt -Ibazel-bin
++#        --copt -Ibazel-bin/external/com_github_gflags_gflags/_virtual_includes/gflags
++#        --copt -Ibazel-bin/external/com_github_glog_glog/_virtual_includes/default_glog_headers
++#        --copt -Ibazel-bin/external/com_github_glog_glog_no_gflags/_virtual_includes/default_glog_headers
++#        """,
++#        "//GDMP/io:camera_helper_android": """
++#        --host_crosstool_top=@bazel_tools//tools/cpp:toolchain
++#        --crosstool_top=//external:android/crosstool
++#        --cpu=arm64-v8a
++#        --copt -Ibazel-bin
++#        --copt -Ibazel-bin/external/com_github_gflags_gflags/_virtual_includes/gflags
++#        --copt -Ibazel-bin/external/com_github_glog_glog/_virtual_includes/default_glog_headers
++#        --copt -Ibazel-bin/external/com_github_glog_glog_no_gflags/_virtual_includes/default_glog_headers
++#        """,
++#    },
++#)
+diff --git a/mediapipe_setup.diff b/mediapipe_setup.diff
+index 2cb48e0..8f028ed 100644
+--- a/mediapipe_setup.diff
++++ b/mediapipe_setup.diff
+@@ -16,8 +16,8 @@ diff --git a/WORKSPACE b/WORKSPACE
+ +    url = "https://github.com/hedronvision/bazel-compile-commands-extractor/archive/main.zip",
+ +    strip_prefix = "bazel-compile-commands-extractor-main",
+ +)
+-+load("@hedron_compile_commands//:workspace_setup.bzl", "hedron_compile_commands_setup")
+-+hedron_compile_commands_setup()
+++#load("@hedron_compile_commands//:workspace_setup.bzl", "hedron_compile_commands_setup")
+++#hedron_compile_commands_setup()
+ +
+  # Protobuf expects an //external:python_headers target
+  bind(
+--
+2.43.0
